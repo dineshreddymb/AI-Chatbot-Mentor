@@ -1,0 +1,50 @@
+User: hello
+
+Mentor: Hello there! It's great to hear from you. I'm your dedicated AI mentor for Power BI.
+
+How can I help you get started with Power BI today? Are you curious about a specific feature, a general concept, or perhaps you have a particular challenge you're trying to solve with Power BI? Let me know what's on your mind!
+
+User: tell me types of data loading in power bi
+
+Mentor: That's an excellent question to start with when diving into Power BI! Understanding how to load data is fundamental to building effective reports.
+
+In Power BI, you primarily have two main types of data loading strategies:
+
+1.  **Import Data:**
+    *   **What it is:** This is the most common method. When you use "Import," Power BI copies the entire dataset from your source into its own internal data model, which is then stored in memory on your local machine or in the Power BI service.
+    *   **How it works:** You select your data source, connect to it, choose the tables or queries you want, and Power BI loads that data into the Power BI Desktop file (.pbix).
+    *   **Pros:**
+        *   **Performance:** Once loaded, queries are generally very fast because the data is optimized and readily available in memory.
+        *   **Full Functionality:** All Power BI features, including DAX calculations, Power Query transformations, and report interactions, work seamlessly with imported data.
+        *   **Offline Access:** You can work with your report even when disconnected from the original data source.
+    *   **Cons:**
+        *   **Data Refresh:** You need to manually refresh the data (either in Power BI Desktop or schedule refreshes in the Power BI service) to get the latest information.
+        *   **File Size:** Large datasets can increase the .pbix file size and consume more memory.
+        *   **Data Staleness:** If you don't refresh frequently, your reports will show outdated data.
+    *   **When to use it:** This is ideal for smaller to medium-sized datasets where you need the best performance and want to leverage all of Power BI's capabilities. It's also a good choice if your data source doesn't support DirectQuery, or if you need to perform extensive transformations in Power Query.
+
+2.  **DirectQuery:**
+    *   **What it is:** With DirectQuery, Power BI does *not* copy the data into its data model. Instead, when a user interacts with a report (e.g., clicks on a filter, drills down), Power BI sends queries directly to the original data source. The results of these queries are then displayed in the report.
+    *   **How it works:** You select your data source, choose DirectQuery mode, and Power BI connects live to the source. Transformations are still done in Power Query, but they are often pushed down to the source database as part of the queries.
+    *   **Pros:**
+        *   **Real-time or Near Real-time Data:** Data is always up-to-date as it's queried directly from the source at the time of interaction.
+        *   **Handles Very Large Datasets:** Because data isn't loaded into Power BI's model, you can work with datasets that are too large to fit into memory.
+        *   **Reduces Load on Power BI:** Less memory and processing power are needed on the Power BI side.
+    *   **Cons:**
+        *   **Performance Dependence:** Report performance is directly tied to the performance of your data source. If the source is slow, your reports will be slow.
+        *   **Limited DAX Functions:** Some DAX functions might not be supported or might perform poorly in DirectQuery mode because they can't be translated into the query language of the source.
+        *   **Fewer Power Query Transformations:** Some complex transformations might not be supported or might not be pushed down efficiently to the source.
+        *   **No Offline Access:** You must have a live connection to the data source to view or interact with the report.
+    *   **When to use it:** This is best for very large datasets, or when you absolutely need near real-time data, and your data source is capable of handling direct queries efficiently (e.g., SQL Server, Azure SQL Database, Snowflake, Azure Synapse Analytics).
+
+**Composite Models (a hybrid approach):**
+
+It's also worth mentioning **Composite Models**. This is a more advanced scenario where you can combine data from both Import and DirectQuery sources within a single Power BI model. For example, you might import a small dimension table (like a product lookup) and use DirectQuery to access a very large fact table (like sales transactions). This allows you to leverage the benefits of both approaches.
+
+**In summary:**
+
+*   **Import:** Copy data into Power BI for fast performance and full functionality, requires refreshes.
+*   **DirectQuery:** Query data directly from the source for near real-time data and handling massive datasets, performance depends on the source.
+
+Which of these sounds more like what you're looking to do, or do you have any specific scenarios in mind? I'm happy to elaborate further!
+
