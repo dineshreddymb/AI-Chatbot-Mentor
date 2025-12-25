@@ -99,7 +99,7 @@ with right_col:
             chat_text += f"{role}: {msg['content']}\n\n"
 
         st.download_button(
-            label="📥 Download Chat",
+            label=" Download Chat",
             data=chat_text,
             file_name=f"ai_chatbot_mentor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
             mime="text/plain",
